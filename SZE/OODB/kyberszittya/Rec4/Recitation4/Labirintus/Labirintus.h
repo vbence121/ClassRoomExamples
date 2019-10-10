@@ -40,4 +40,6 @@ public:
 		const unsigned int x, const unsigned int y);
 
 	bool noLivingMonsters();
+	int livingMonsters();
+	void moveMonsters();
 };

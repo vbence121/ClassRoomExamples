@@ -21,8 +21,8 @@ protected:
 	PadloElem* current_padloelem;
 	const UnitType unittype;
 public:
-	Unit(unsigned int health, unsigned int attack, unsigned int damage, unsigned int defense, const UnitType unittype): 
-		unitstat({health, attack, damage, defense}),
+	Unit(unsigned int health, unsigned int attack, unsigned int damage, unsigned int defense, const UnitType unittype) :
+		unitstat({ health, attack, damage, defense }),
 		dead(false),
 		current_padloelem(NULL),
 		unittype(unittype)
@@ -34,7 +34,7 @@ public:
 	}
 
 	bool kill();
-	
+
 
 	bool move(MovingDirection movedir);
 	void damage(unsigned int attack, unsigned int damage);
@@ -44,5 +44,8 @@ public:
 	UnitType getUnitType() const
 	{
 		return unittype;
+	}
+	Coordinate getCurrentCoord() {
+		return current_padloelem->getCoord();
 	}
 };
