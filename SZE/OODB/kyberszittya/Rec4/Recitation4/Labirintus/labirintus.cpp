@@ -151,3 +151,53 @@ void Labirintus::initWallPosition(const int wall_id, const unsigned int x, const
 	elems[y * LABIRINTUS_SIZE_X + x].setOccupyingUnit(&wallelems[wall_id]);
 	wallelems[wall_id].setCurrentPadloelem(&elems[y * LABIRINTUS_SIZE_X + x]);
 }
+
+
+int randNum() {
+	return std::rand() % 5;
+}
+void randMove(Monster* u) {
+	switch (randNum()) {
+	case (0): {
+		break;
+	}
+	case (1):
+		u->move(ESZAK);
+	case (2):
+		u->move(KELET);
+	case (3):
+		u->move(DEL);
+	case (4):
+		u->move(NYUGAT);
+	}
+}
+
+int Labirintus::livingMonsters()
+{
+	unsigned int living_monsters = 0;
+	for (int i = 0; i < max_monster_cnt; i++)
+	{
+		if (!monsters[i].isKilled())
+		{
+			living_monsters++;
+		}
+	}
+	return living_monsters;
+}
+
+double sqr(double d) {
+	return d * d;
+}
+
+double checkDist(Hero& h, Monster& m) {
+	return sqrt(sqr(m.getCurrentCoord().x - h.getCurrentCoord().x) + sqr(m.getCurrentCoord().y - h.getCurrentCoord().y));
+}
+
+void Labirintus::moveMonsters() {
+	for (int i = 0; i < livingMonsters(); i++) {
+		if (checkDist(hero, monsters[i]) > 1)
+			randMove(&monsters[i]);
+		else
+			std::cout << checkDist(hero, monsters[i]);
+	}
+}
